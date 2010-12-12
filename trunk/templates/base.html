@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Sappira Sentinel</title>
+
+<link rel="stylesheet" href="/static/blueprint.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/static/residency.css" type="text/css" media="screen" />
+
+
+<link rel="stylesheet" href="/static/css/jquery/jquery.css" type="text/css" media="screen" />
+
+
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+
+<script type="text/javascript" src="/static/js/jquery.ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.sparkline.js"></script>
+<script type="text/javascript" src="/static/js/jquery.autoresize.js"></script>
+
+<script type="text/javascript" src="/static/js/date.js"></script>
+
+<script type="text/javascript" src="/static/georgetown.js"></script>
+</head>
+
+<body>
+	<div id="header-zone">
+		<div class="container">
+			{% block header %}	
+					<div id="header">
+						<a href="/" id="logo"><img src="/static/images/logo.png" title="Sentinel"/></a>
+					</div>
+					<div id="tabs">
+						<ul>
+							<li><a>About</a></li>
+							{% if user.is_authenticated %}
+								<li><a href="/accounts/logout/">Logout</a></li>
+							{% endif %}
+							{% if user.is_authenticated %}
+							<li><a href="/admin/">Administration</a></li>
+							{% endif %}
+						</ul>
+					</div>
+			{% endblock %}
+		</div>
+	</div>
+	<div id="page-title-holder">
+		<div class="container">
+			<div id="page-title">{% block title %}Default{% endblock %}</div>
+		</div>
+	</div>
+<div id="wrapper-zone">
+	<div class="container">
+		<div class="span-6">
+			{% block side-zone %}
+			<div id="side-zone">
+				<div class="block">
+					<div class="unit-header"><a href="/">My Patients</a></div>
+					
+					<div class="unit">
+						<ul>
+							{% for patient in patient_list %}
+								<li><a href="{{ patient.get_absolute_url }}">{{ patient }}<span class="right quiet">{{ patient.location }}</span></a></li>
+								<dl class="details">
+									<dt>Birth Date</dt> 
+										<dd>{{ patient.birth_date|date }}</dd>
+									<dt>Age</dt> 
+										<dd>{{ patient.birth_date|timesince|title }}</dd>
+									<dt>Admission Date</dt> 
+										<dd>{{ patient.created_date }}</dd>
+									<dt>Stay Length</dt> 
+										<dd>{{ patient.created_date|timesince }}</dd>
+								</dl>
+							{% empty %}
+								<li>No Patients</li>
+							{% endfor %}
+							</ul>
+					</div>
+
+					{% include "team_list.html" %}
+			</div>
+						</div>
+			{% endblock side-zone %}
+		</div>
+		<div class="span-18 last" id="main-zone">
+			<div >
+				{% block main-zone %}
+				{% endblock main-zone %}
+			</div>
+		</div>
+</div>
+		<div class="span-24" id="footer" role="contentinfo"></div>
+
+	</div>
+</body>
+</html>

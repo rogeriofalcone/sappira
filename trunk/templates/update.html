@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Georgetown Family Medicine</title>
+
+
+<link rel="stylesheet" href="/static/blueprint/screen.css" type="text/css" media="screen, projection" />
+<link rel="stylesheet" type="text/css" href="/static/residency.css" media="screen" />
+
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/jquery.ui.js"></script>
+<script type="text/javascript" src="/static/js/jquery.autoresize.js"></script>
+<script type="text/javascript" src="/static/js/jquery.metadata.js"></script>
+
+<script type="text/javascript" src="/static/js/date.js"></script>
+<script type="text/javascript" src="/static/js/georgetown.js"></script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+	$("input, textarea").each(function(){
+		width = $(this).parent("div").innerWidth()
+		$(this).width(width-2);
+	});
+				
+	$(function() {
+		function split(val) {
+			return val.split(/,\s*/);
+		}
+		function extractLast(term) {
+			return split(term).pop();
+		}
+				
+		$("#id_medications").autocomplete({
+			minLength: 4,
+			source: function(request, response) {
+				$.getJSON("/medication/", {
+					term: extractLast(request.term)
+				}, response);
+			},
+			search: function() {
+				// custom minLength
+				var term = extractLast(this.value);
+				if (term.length < 4) {
+					return false;
+				}
+			},
+			focus: function() {
+				// prevent value inserted on focus
+				return false;
+			},
+			select: function(event, ui) {
+				var terms = split( this.value );
+				// remove the current input
+				terms.pop();
+				// add the selected item
+				terms.push( ui.item.value );
+				// add placeholder to get the comma-and-space at the end
+				terms.push("");
+				this.value = terms.join(", ");
+				return false;
+			}
+		});
+	});
+	
+	$(function() {
+		function split(val) {
+			return val.split(/,\s*/);
+		}
+		function extractLast(term) {
+			return split(term).pop();
+		}
+				
+		$("#id_problems").autocomplete({
+			minLength: 4,
+			source: function(request, response) {
+				$.getJSON("/problem/", {
+					term: extractLast(request.term)
+				}, response);
+			},
+			search: function() {
+				// custom minLength
+				var term = extractLast(this.value);
+				if (term.length < 4) {
+					return false;
+				}
+			},
+			focus: function() {
+				// prevent value inserted on focus
+				return false;
+			},
+			select: function(event, ui) {
+				var terms = split( this.value );
+				// remove the current input
+				terms.pop();
+				// add the selected item
+				terms.push( ui.item.value );
+				// add placeholder to get the comma-and-space at the end
+				terms.push("");
+				this.value = terms.join(", ");
+				return false;
+			}
+		});
+	});
+		
+	$("input, textarea").focusin(
+		function () {
+		$(this).addClass("ui-state-focus");
+		$(this).closest("div").addClass("bold");
+	 });
+	$("input, textarea").focusout(
+		function () {
+		$(this).removeClass("ui-state-focus");
+		$(this).closest("div").removeClass("bold");
+	 });
+	
+	$("#id_weight, #id_height, #id_bmi").blur(function()
+		{
+		var bmi = calculate_bmi($("#id_height").val(), $("#id_weight").val());
+		$("#id_bmi").val(bmi);
+		$("#id_bmi_class").val(calculate_bmi_class(bmi));
+		});
+	
+	$("#id_dob, #id_age").blur(function() { 
+		var age = calculate_age($("#id_dob"));
+		$("#id_age").val(age);
+	});
+	
+	$("#id_height").blur(function() { 
+		$("#id_height_percentile").val(calculate_height_percentile($("#id_gender").val(),calculate_age_in_months($("#id_dob")),$("#id_height").val()));
+	});
+	
+	$("#id_weight").blur(function() { 
+		$("#id_weight_percentile").val(calculate_weight_percentile($("#id_gender").val(),calculate_age_in_months($("#id_dob")),$("#id_weight").val()));
+	});
+	
+	
+		
+	// Style the buttons:
+	$(".button").button( "option", "icons", {primary:"ui-icon-help"});	
+	$(".button").toggle(
+		function() {
+			$(this).button( "option", "icons", {primary:"ui-icon-circle-plus"})
+		},
+		function() {
+			$(this).button( "option", "icons", {primary:"ui-icon-circle-minus"})
+		});
+	
+	$("textarea").autoResize({ extraSpace:0 });
+	
+});
+</script>
+
+</head>
+<body>
+	
+
+<div id="header">	
+	<div class="container">
+		<div id="logo"><h1><img src="/static/images/logo.png" title="Georgetown Family Medicine"></h></div>
+	</div>
+</div>
+
+<div id="mainarea">		
+	<div class="container">		
+		<div class="span-16">
+			<form id="form" action"" method="post">				
+					
+			<div>
+				<h3>Demographics</h3>
+				<fieldset>
+						<div class="span-8"><div><label for="id_name">Name</label>{{ demographics.name }}</div></div>
+						<div class="span-2"><div><label for="id_gender">Gender</label>{{ demographics.gender }}</div></div>
+						<div class="span-4"><div><label for="id_dob">Birth Date</label>{{ demographics.dob }}</div></div>
+						<div class="span-2 last"><div><label for="id_age">Age</label>{{ demographics.age }}</div></div>
+				</fieldset>
+			</div>
+			
+			<div>
+				<fieldset>
+					<h3>Vitals</h3>
+					<div class="span-2"><div><label for="id_height">Height</label>{{ vitals.height }}</div></div>
+					<div class="span-2"><div><label for="id_height_percentile">Percentile</label>{{ vitals.height_percentile }}</div></div>
+		
+					<div class="span-2"><div><label for="id_weight">Weight</label>{{ vitals.weight }}</div></div>
+					<div class="span-2"><div><label for="id_weight_percentile">Percentile</label>{{ vitals.weight_percentile }}</div></div>
+					
+					<div class="span-4"><div><label for="id_bmi">Body Mass</label>{{ vitals.bmi }}</div></div>
+					<div class="span-4 last"><div><label for="id_bmi_class">Body Mass Status</label>{{ vitals.bmi_class }}</div></div>
+					<hr class="space">
+					<div class="span-4 clear"><div><label for="id_pulse">Pulse</label>{{ vitals.pulse }}</div></div>
+					<div class="span-4"><div><label for="id_systolic">Systolic</label>{{ vitals.systolic }}</div></div>
+					<div class="span-4 last"><div><label for="id_diastolic">Diastolic</label>{{ vitals.diastolic }}</div></div>
+				</fieldset>
+			</div>
+			
+			<div>
+				<fieldset>
+					<div class="span-16 last"><div><label for="id_cc">Chief Complaint</label>{{ history.cc }}</div></div>
+					<hr class="space">
+					<div class="span-8"><div><label for="id_hpi">History of Present Illness</label>{{ history.hpi }}</div></div>
+					<div class="span-4">
+						<div><label for="id_medications">Medications</label>{{ history.medications }}</div></div>
+					<div class="span-4 last"><div><label for="id_problems">Problems</label>{{ history.problems }}</div></div>
+					<hr class="space">
+					<div class="span-16 last"><div><label for="id_ros">Review of Systems</label>{{ history.ros }}</div></div>
+				</fieldset>
+			</div>
+			
+		{% csrf_token %}
+	
+		</form>
+		</div>
+		
+		<div class="span-7 prepend-1 last">
+			<div>
+				<h3>Basic Questions</h3>
+				<div>
+					<div class="button">Denies Fever</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+<div id="footer"></div>
+</body>
+</html>

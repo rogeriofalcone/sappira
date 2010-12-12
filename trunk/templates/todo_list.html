@@ -1,0 +1,33 @@
+{% load extras %}
+
+<ul id="todo-list">
+	{% for todo in patient.todo_set.all %}
+		{% if not todo.done %}
+			<li {% if todo.created_date|timeuntil < todo.created_date|timesince %} class="alert" {% endif %} >		
+				{{ todo.name|title }}
+			</li>				
+			<dl class="details">
+				<dt>Posted</dt> 
+				<dd>{{ todo.created_date|date:"m/d"}} <span class="quiet right">{{ todo.created_date|timesince|title }} Ago</span></dd>
+				<dt>Actions</dt>
+					<dd><form class="button-form" method="post" action="/todo/stop">{% csrf_token %}		
+						<input type="hidden" name="patient" class="patient-value" value="{{ patient.id }}" />
+						<input type="hidden" name="todo" id="id_todo" value="{{ todo.id }}" />
+							<a class="submit">Done</a>
+					</form></dd>
+			</dl>
+
+		{% endif %}
+	{% endfor %}
+	<form id="todo-add-form" method="post" >{% csrf_token %}
+		<li>
+			<input type="hidden" name="todo_form" value="True" />
+			<input type="hidden" name="patient" value="{{ patient.id }}" />
+			<input type="hidden" name="active" value="True" />
+			<table>
+				<tr><th>New todo{{ todo_form.name.errors }}</th></tr>
+				<tr><td><input type="text" name="name" /></td></tr>
+			</table>
+		</li>
+	</form>
+</ul>

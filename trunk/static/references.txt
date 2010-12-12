@@ -1,0 +1,17 @@
+Blood Pressure:
+
+	Joint National Committee: http://www.nhlbi.nih.gov/guidelines/hypertension/jncintro.htm
+	
+Growth Data
+
+	CDC Normalized Growth Data: http://www.cdc.gov/growthcharts/percentile_data_files.htm
+
+Codes
+
+	ICD-10: http://www.cdc.gov/nchs/icd/icd10.htm
+	ICD-9:
+
+Approved Drugs
+
+	FDA Approved Drug List:
+

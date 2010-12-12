@@ -1,0 +1,40 @@
+<ul id="prescription-list">
+	{% for prescription in patient.prescription_set.all %}
+		{% if prescription.active %}
+		<form class="button-form" method="post" action="">{% csrf_token %}
+			<li>		
+				{{ prescription.name|title }}
+				<input type="hidden" name="patient" class="patient-value" value="{{ patient.id }}" />
+				<input type="hidden" name="prescription" id="id_prescription" value="{{ prescription.id }}" />
+				<a class="prescription-edit edit button"></a>			
+				<a class="prescription-stop stop button"></a>
+			</li>
+			<dl class="details">
+				<dt>Details</dt>
+					<dd>{{ prescription.name|title }}{{ prescription.dose }}{{ prescription.unit }} {{ prescription.schedule|upper }}</dd>
+					<form id="prescription-edit-form" class="quick-form" method="post">{% csrf_token %}
+						<dd><input type="text" name="name"></dd>
+					</form>
+						
+				<dt>Duration</dt>
+					<dd>{{ prescription.start_date|timesince }}</dd>					
+			</dl>
+		</form>
+		{% endif %}
+	{% endfor %}
+	<form id="prescription-add-form" class="quick-form" method="post">{% csrf_token %}
+			<input type="hidden" name="patient" value="{{ patient.id }}" />
+			<input type="hidden" name="active" value="True" />
+			<input type="hidden" name="prescription_form" value="True" />
+			<li>
+				<table>
+					<tr><th>Name{{ prescription_form.name.errors }}</th></tr>
+					<tr><td><input type="text" name="name" id="ajax_medication"></td></tr>
+					<tr><th>Dose{{ prescription_form.dose.errors }}</th></tr>
+					<tr><td><input type="text" name="dose"></td></tr>
+					<tr><th>Unit{{ prescription_form.unit.errors }}</th></tr>
+					<tr><td><input type="text" name="unit"></td></tr>
+				</table>
+			</li>
+	</form>
+</ul>

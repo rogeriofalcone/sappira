@@ -1,0 +1,17 @@
+{% for team in team_list %}
+	<div class="unit-header"><a href="{{ team.get_absolute_url }}">{{ team }} Team </a><span class="quiet right">{{team.patient_set.all.count }}</span></div>
+	<div class="unit">
+	<dl class="details">
+	{% for user in team.users.all %}
+		<dt>{{ user.first_name }} {{ user.last_name }}<span class="right quiet">{{ user.get_profile.pager_phone_number }}</span></dt>
+	{% endfor %}
+	</dl>
+	<ul class="patient-list">
+	{% for patient in team.patient_set.all %}
+		<li><a href="{{ patient.get_absolute_url }}">{{ patient }}<span class="right quiet">{{ patient.location }}</span></a></li>
+	{% empty %}
+		<li>No Patients</li>
+	{% endfor %}
+	</ul>
+	</div>
+{% endfor %}
