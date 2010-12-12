@@ -1,0 +1,31 @@
+Sappira Electronic Medical Record Project
+
+Test Stack:
+1. Python 2.6
+2. SQLlite
+3. Django 1.1 Final
+4. Firefox 3.5
+
+Running Test System:
+1. Ensure that you have the necessary stack working smoothly.
+2. Download the Sappira files to a new folder by SVN.
+3. Navigate to the Sappira folder.
+4. Enter a shell and type 'python manage.py syncdb'. This will create the necessary databases and tables as well as loading the sample data. When asked if you would like to create a superuser you may answer no as a superuser is included in the sample data.
+5. When the databases and table creation is complete type 'python manage.py runserver'
+6. Open a web browser and type '127.0.0.1:8000' into the address bar. This will navigate to the local Django server you are now running.
+
+Planned Deployment Stack:
+1. Python 2.6
+2. TBD: PostGRE or MySQL
+3. Django 1.1 Final
+4. Minimum: Firefox 3 / Internet Explorer 6 / Chrome 1.0
+
+Planned Included Apps:
+0. App Name: Description [Key Database Models]
+1. Admin.Auth: Built in Django Permission System [Users, Groups, Permissions]
+2. Medical Record: Central App that Stores Full Record [Patient, Prescription List, Problem List, Datum]
+3. Inpatient: Manage Hospital Admissions [Admission, Team, Note]
+*4. Outpatient: Future App for Managing Outpatient Visits [Visit]
+*5. PACS: Future PACS Server App or PACS Server Mediator [Image]
+*6. Google Health / Microsoft Health Vault: Future App to Manage Date Import and Export
+*7. Import Record: Future App to Manage Record Import from Meditech, Cerner, etc.

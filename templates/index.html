@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block main-zone %}
+<div class="block span-18 last">
+	<div class="span-12">
+		<div class="unit-header">Add Patient</div>
+		<div class="unit">
+			<form method="post">{% csrf_token %}
+				<ul>
+					{{ patient_form.as_ul }}
+					<li><button type="submit">Add</button></li>
+				</ul>
+			</form>
+		</div>
+	</div>
+	
+	<div class="span-6 last">
+		<div class="unit-header">Recent Events</div>
+		<div class="unit">
+			
+			<dl class="details">
+				{% for prescription in prescription_list %}
+					<dt>New Prescription</dt>
+					<dd>{{ prescription.patient }} - {{ prescription.name }} {{ user.prescription }}</dd>
+				{% endfor %}
+			</dl>
+			
+			</ul>
+		</div>
+	</div>
+	
+</div>
+{% endblock %}

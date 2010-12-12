@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}{{ patient }}{% endblock %}
+
+{% block main-zone %}
+<div class="block span-18 last">
+	<div class="span-6">
+		<div class="unit">
+			<div class="unit-header">Identification</div>
+			<div class="unit-content">
+				{% include "identification_list.html" %}
+			</div>
+		</div>
+	</div>
+	
+	<div class="span-6">		
+		<div class="unit">
+			<div class="unit-header">Presentation</div>
+			<div class="unit-content">
+				<textarea name="presentation" class="small-text-box">{{ patient.presentation }}</textarea>
+			</div>
+		</div>
+		<div class="unit">
+			<div class="unit-header">Notes</div>
+			<div class="unit-content">
+				<textarea name="notes" class="small-text-box"></textarea>
+			</div>
+		</div>
+	</div>
+	
+	<div class="span-6 last">		
+		<div class="unit">
+			<div class="unit-header">Data</div>
+			<div class="unit-content">
+				<ul>
+					<li>Height and Weight</li>
+				<dl class="details">
+					<dt>Height</dt>
+					<dd>{{ patient.height_set.latest.value }} cm</dd>			
+					{{ height_form.value.errors }}
+					<dd>
+						<form method="post">{% csrf_token %}
+							<input type="hidden" name="height_form" value="True" />
+							<input type="hidden" name="patient" value="{{ patient.id }}" />
+							<input type="text" name="value" />
+						<a>Update</a>
+						</form>
+					</dd>
+					<dt>Weight</dt> 
+					<dd>{{ patient.weight_set.latest.value }} kg</dd>
+					<dd>
+						<form method="post">{% csrf_token %}
+							<input type="hidden" name="weight_form" value="True" />
+							<input type="hidden" name="patient" value="{{ patient.id }}" />
+							<input type="text" name="value" />
+						<button type="submit">Weight</button>
+					</form>
+					</dd>
+
+					{% if patient.bmi %}
+						<dt>BMI</dt> 
+							<dd>{{ patient.bmi }} {{ patient.bmi_class }}</dd>
+					{% endif %}
+				</dl>
+			</ul>
+			</div>
+		</div>
+	</div>
+	
+</div>
+<div class="span-18 last">
+	<div class="span-6">
+		<div class="unit">
+			<div class="unit-header" id="todos">To Do</div>
+				{% include "todo_list.html" %}
+			<div class="unit-content">
+			</div>
+		</div>
+	</div>
+	
+	<div class="span-6">
+		<div class="unit" id="problems">
+			<div class="unit-header">Problems</div>
+			<div class="unit-content">				
+				{% include "problem_list.html" %}
+			</div>
+		</div>
+	</div>
+	
+	<div class="span-6 last">
+			<div class="unit" id="prescriptions">
+				<div class="unit-header">Prescriptions</div>
+				<div class="unit-content">
+					{% include "prescription_list.html" %}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

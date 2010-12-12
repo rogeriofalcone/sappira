@@ -1,0 +1,246 @@
+/*
+Copyright (c) 2009, Three Leg Studios. All rights reserved.
+*/
+html {
+font-size: 85%;
+}
+body {
+background: #00a3e4;
+font-family: "Lucida Grande";
+line-height: 1.5;
+}
+textarea {
+margin: 0;
+}
+/*
+Header
+FIXME Banner doesn't Space correctly
+*/
+#header-zone {
+padding: 1.5em 0 1.5em 0;
+}
+#header {
+float: left;
+}
+#tabs {
+text-transform: uppercase;
+line-height: 27px;
+}
+#tabs ul {
+font-weight: bold;
+}
+#tabs li {
+float: right;
+margin: 0 0 0 10px;
+}
+#tabs a {
+color: #fff;
+background: #999;
+text-decoration: none;
+padding: .5em;
+}
+#page-title-holder {
+background: #060a75;
+color: #FFF;
+}
+#page-title {
+text-transform: uppercase;
+font-weight: bold;
+font-size: 1.5em;
+padding: 10px 0 10px 0;
+}
+#wrapper-zone {
+background: #FFFFFF;
+padding: 1.5em 1.5em 1.5em 1.5em;
+}
+#side-zone .unit-header {
+	background: #89c9e3;
+}
+#main-zone {
+}
+.block-header {
+text-transform: uppercase;
+font-weight: bold;
+font-size: 1.5em;
+margin-bottom: 5px;
+}
+.block a {
+text-decoration: none;
+}
+
+.block {
+margin: 0 0 1.5em 0;
+}
+
+ul, li {
+list-style-type: none;
+}
+
+/*
+Units
+*/
+.unit {
+margin-bottom: 10px;
+}
+.unit-header {
+color: #FFF;
+font-weight: bold;
+text-transform: uppercase;
+padding: 5px 10px 5px 10px;
+background: #89c9e3;
+}
+.unit li:first-child {
+}
+
+
+.unit li {
+font-weight: bold;
+margin: 5px 0 0 0;
+padding: 5px 10px 5px 10px;
+color: #333;
+background: #DDD;
+}
+.unit dl {
+background: #EEE;
+padding: 0 0 5px 0;
+}
+.unit-header a {
+text-decoration: none;
+color: #FFF;
+}
+.unit p {
+	padding: 10px;
+}
+.errorlist {
+padding: 0;
+text-transform: uppercase;
+}
+.errorlist li {
+color: #ff6666;
+padding: 0;
+margin: 0;
+}
+.member-list li {
+margin: 0;
+}
+.details dl {
+text-transform: uppercase;	
+font-size: 0.9em;
+padding: 0px 0 5px 0;
+margin-bottom: 5px;
+}
+.details dt {
+text-transform: uppercase;
+color: #999;
+font-weight: bold;
+padding: 5px 10px 0 10px;
+font-size: 0.65em;	
+}
+.details a {
+	color: #f00;
+	cursor: pointer;
+}
+.details input {
+	width: 100px;
+	font-weight: bold;
+	font-size: 9.5px;
+	padding: 0px;
+}
+
+.details li, .details dd {
+font-weight: bold;
+font-size: 0.8em;
+color: #333;
+margin: 0;
+padding: 0 10px 0 10px;
+}
+
+/*
+Footer
+*/
+#footer {
+background: #345323;
+}
+
+/*
+Forms
+*/
+input {
+font-family: "Avenir LT";
+margin: 0;
+padding: .25em;
+border: 1px solid #999999;
+}
+.small-text-box {
+font-family: "Avenir LT";
+font-size: .9em;
+color: #333;
+border: 1px solid #ccc;
+background; #FFF;
+padding: 10px;
+}
+input {
+width: 170px;
+}
+th {
+font-weight: bold;
+text-transform: uppercase;
+font-size: 0.7em;
+color: #666;
+padding: 5px 0 0 0;
+}
+td {
+padding-bottom: 5px;
+}
+/*
+Basic Modifiers
+*/
+.highlight {
+background: #FFF8CC;
+border: 1px solid #FFE222;
+}
+.lowlight {
+border-top: 1px solid #b2b2b2;
+background: #f9f9f9;
+}
+.alert {
+background:#fde43c;
+color: #f6364b;
+}
+.alert p {
+background: #fdf7cb;
+}
+.quiet {
+color: #666;
+}
+.center {
+text-align: center;
+margin: auto;
+}
+.right {
+float: right;
+}
+.button {
+cursor: pointer;
+padding: 2px;
+height: 16px;
+width: 16px;
+float: right;
+display: none;
+}
+.stop {
+background: url("images/icons/document--minus.png") no-repeat;
+}
+.edit {
+background: url("images/icons/document--pencil.png") no-repeat;
+}
+.add {
+background: url("images/icons/document--plus.png") no-repeat;
+}
+.hide {
+display: none;
+}
+
+/*
+Buttons
+*/

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome Back{% endblock %}
+
+{% block side-zone %}
+<div class="block">
+	<div class="unit login">
+		<div class="unit-header">Login</div>		
+		
+		{% if form.errors %}
+		<p>Your username and password didn't match. Please try again.</p>
+		{% endif %}
+
+		<form method="post" action="">
+			{% csrf_token %}
+			<dl id="login">
+				<dt>User Name</dt>
+				<dd><input class="" id="id_username" name="username" maxlength="30" type="text"></dd>
+				<dt>Password</dt>
+				<dd><input class="" name="password" id="id_password" type="password"></dd>
+				<li><button type="submit">Login</button></li>
+			</dl>
+		</form>
+	</div>
+</div>
+{% endblock %}
+{% block main-zone %}
+<div class="block span-18 last">
+	<div class="unit alert">
+		<div class="unit-header">Alert</div>
+		<div class="unit-content">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+		</div>
+	</div>
+	<div class="unit">
+		<div class="unit-header">Announcement</div>	
+		<div class="unit-content">
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</div>
+</div>
+{% endblock %}
