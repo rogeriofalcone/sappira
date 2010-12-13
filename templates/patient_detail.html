@@ -42,8 +42,8 @@
 						<form method="post">{% csrf_token %}
 							<input type="hidden" name="height_form" value="True" />
 							<input type="hidden" name="patient" value="{{ patient.id }}" />
-							<input type="text" name="value" />
-						<a>Update</a>
+							<input type="text" name="value" value="{{ patient.height_set.latest.value }}"/>
+						<a class="submit">Update</a>
 						</form>
 					</dd>
 					<dt>Weight</dt> 
@@ -52,8 +52,8 @@
 						<form method="post">{% csrf_token %}
 							<input type="hidden" name="weight_form" value="True" />
 							<input type="hidden" name="patient" value="{{ patient.id }}" />
-							<input type="text" name="value" />
-						<button type="submit">Weight</button>
+							<input type="text" name="value" value="{{ patient.weight_set.latest.value }}" />
+							<a class="submit">Update</a>
 					</form>
 					</dd>
 

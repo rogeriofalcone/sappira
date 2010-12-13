@@ -70,7 +70,7 @@
 									<dt>Admission Date</dt> 
 										<dd>{{ patient.created_date }}</dd>
 									<dt>Stay Length</dt> 
-										<dd>{{ patient.created_date|timesince }}</dd>
+										<dd>{{ patient.created_date|timesince|title }}</dd>
 								</dl>
 							{% empty %}
 								<li>No Patients</li>

@@ -1,6 +1,8 @@
 $(document).ready(function() {
 	// Sizing Functions
 	
+	$(".hidse").hide();
+	
 	$("textarea").each(function() {
 		//FIXME Inelegant Solution
 		$(this).width(($(this).parent(".unit-content").outerWidth())-22);
@@ -15,16 +17,16 @@ $(document).ready(function() {
 	});
 
 	$("li, dd").live("click", function(event){
-		$(this).next(".details").toggle("blind");
+		$(this).next(".hide").toggle("blind");
 	});
-
+/*
 	$("#prescription-list li, #problem-list li").live("mouseenter", function(event){
 		$(this).children(".button").show();
 	});
 	$("#prescription-list li, #problem-list li").live("mouseleave", function(event){
 		$(this).children(".button").hide();
 	});
-	
+*/	
 	$("#problem-add-form").live("keypress", function (e) {
 	   if ( e.keyCode == 13 ){
 			e.preventDefault();

@@ -89,16 +89,12 @@ text-transform: uppercase;
 padding: 5px 10px 5px 10px;
 background: #89c9e3;
 }
-.unit li:first-child {
-}
-
-
 .unit li {
 font-weight: bold;
 margin: 5px 0 0 0;
 padding: 5px 10px 5px 10px;
 color: #333;
-background: #DDD;
+background: #ddd;
 }
 .unit dl {
 background: #EEE;
@@ -220,27 +216,23 @@ margin: auto;
 .right {
 float: right;
 }
-.button {
-cursor: pointer;
-padding: 2px;
-height: 16px;
-width: 16px;
-float: right;
-display: none;
-}
-.stop {
-background: url("images/icons/document--minus.png") no-repeat;
-}
-.edit {
-background: url("images/icons/document--pencil.png") no-repeat;
-}
-.add {
-background: url("images/icons/document--plus.png") no-repeat;
-}
-.hide {
-display: none;
-}
 
+.actions {
+color: #060a75;
+background: #eee;
+font-size: .65em;
+text-transform: uppercase;
+text-align: left;
+}
+.actions a {
+	color: #060a75;
+cursor: pointer;
+}
+.actions li {
+background: #eee;
+padding: 0px 10px 0 10px;
+display: inline-block;
+}
 /*
 Buttons
 */
