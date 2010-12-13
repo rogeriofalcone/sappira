@@ -5,9 +5,10 @@
 Add your content here.
 
 
-= Details =
+= To Do =
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+* Allow Patient to be transferred between teams
+* Easy medication editing
+* Discharge without delete, and able to pull up old patients
+* Allow medication to be associated with problems
+* Renew Todo Items
