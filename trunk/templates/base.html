@@ -59,6 +59,7 @@
 					
 					<div class="unit">
 						<ul>
+							<li><a href="/">New Patient</a>
 							{% for patient in patient_list %}
 								<li><a href="{{ patient.get_absolute_url }}">{{ patient }}<span class="right quiet">{{ patient.location }}</span></a></li>
 								<dl class="details">

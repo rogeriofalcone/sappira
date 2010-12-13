@@ -1,13 +1,14 @@
 <ul id="problem-list">
 	{% for problem in patient.problem_set.all %}
 		{% if problem.active %}
-		<form class="button-form" method="post" action="">{% csrf_token %}
 			<li>		
+				<form class="button-form" method="post" action="">{% csrf_token %}
 				{{ problem.name|title }}
 				<input type="hidden" name="patient" class="patient-value" value="{{ patient.id }}" />
 				<input type="hidden" name="problem" id="id_problem" value="{{ problem.id }}" />
 				<a class="right problem-edit edit button"></a>			
 				<a class="right problem-stop stop button"></a>
+				</form>
 			</li>
 			<dl class="details">
 				<dt>Started</dt> 
@@ -15,7 +16,6 @@
 				<dt>Duration
 					<dd>{{ problem.start_date|timesince }}</dd>
 			</dl>
-		</form>
 		{% endif %}
 	{% endfor %}
 	<form id="problem-add-form" class="quick-form" method="post" >{% csrf_token %}
@@ -24,7 +24,7 @@
 			<input type="hidden" name="patient" value="{{ patient.id }}" />
 			<input type="hidden" name="active" value="True" />
 			<table>
-				<tr><th>Problem{{ problem_form.name.errors }}</th></tr>
+				<tr><th>New Problem{{ problem_form.name.errors }}</th></tr>
 				<tr><td><input class="full-width-input" type="text" name="name" /></td></tr>
 			</table>
 		</li>

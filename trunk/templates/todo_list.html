@@ -10,11 +10,13 @@
 				<dt>Posted</dt> 
 				<dd>{{ todo.created_date|date:"m/d"}} <span class="quiet right">{{ todo.created_date|timesince|title }} Ago</span></dd>
 				<dt>Actions</dt>
-					<dd><form class="button-form" method="post" action="/todo/stop">{% csrf_token %}		
+					<dd>
+						<form class="button-form" method="post" action="/todo/stop">{% csrf_token %}		
 						<input type="hidden" name="patient" class="patient-value" value="{{ patient.id }}" />
 						<input type="hidden" name="todo" id="id_todo" value="{{ todo.id }}" />
 							<a class="submit">Done</a>
-					</form></dd>
+						</form>
+					</dd>
 			</dl>
 
 		{% endif %}
