@@ -10,8 +10,8 @@
 					<a class="prescription-stop stop button"></a>
 				</form>
 			</li>
-			<dl class="details">
-				
+			<span class="hide">
+			<dl class="details">			
 				<dt>Details</dt>
 					<dd>{{ prescription.name|title }}{{ prescription.dose }}{{ prescription.unit }} {{ prescription.schedule|upper }}</dd>
 					<form id="prescription-edit-form" class="quick-form" method="post">{% csrf_token %}	
@@ -20,6 +20,7 @@
 				<dt>Duration</dt>
 					<dd>{{ prescription.start_date|timesince }}</dd>					
 			</dl>
+			</span>
 		{% endif %}
 	{% endfor %}
 	<form id="prescription-add-form" class="quick-form" method="post">{% csrf_token %}

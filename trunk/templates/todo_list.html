@@ -3,22 +3,26 @@
 <ul id="todo-list">
 	{% for todo in patient.todo_set.all %}
 		{% if not todo.done %}
-			<li {% if todo.created_date|timeuntil < todo.created_date|timesince %} class="alert" {% endif %} >		
+			<li {% if todo.created_date|timeuntil < todo.created_date|timesince %} class="alert" {% endif %}>		
 				{{ todo.name|title }}
-			</li>				
-			<dl class="details">
-				<dt>Posted</dt> 
-				<dd>{{ todo.created_date|date:"m/d"}} <span class="quiet right">{{ todo.created_date|timesince|title }} Ago</span></dd>
-				<dt>Actions</dt>
-					<dd>
+			</li>	
+			<div class="hide">			
+				<div class="actions">
+					<ul>
 						<form class="button-form" method="post" action="/todo/stop">{% csrf_token %}		
 						<input type="hidden" name="patient" class="patient-value" value="{{ patient.id }}" />
 						<input type="hidden" name="todo" id="id_todo" value="{{ todo.id }}" />
-							<a class="submit">Done</a>
+						<ul>
+							<li><a class=" submit ">Stop</a></li>
+						</ul>
 						</form>
-					</dd>
-			</dl>
-
+					</ul>
+				</div>
+				<dl class="details">
+					<dt>Posted</dt> 
+					<dd>{{ todo.created_date|date:"m/d"}} <span class="quiet right">{{ todo.created_date|timesince|title }} Ago</span></dd>
+				</dl>
+			</div>
 		{% endif %}
 	{% endfor %}
 	<form id="todo-add-form" method="post" >{% csrf_token %}

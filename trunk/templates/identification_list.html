@@ -3,14 +3,25 @@
 <dl class="details">
 	<dt>Birth Date</dt> 
 		<dd>{{ patient.birth_date }}</dd>
-		<dd class="hide"><form method="post">{% csrf_token %}
-			<input type="hidden" name="birth_date_form" value="True" />
-			<input type="hidden" name="patient" value="{{ patient.id }}" />
-			<input type="text" name="birth_date" value="{{ patient.birth_date|date:"m/d/Y" }}"/>
-		<a class="button">Update</a>
+		<dd class="hide">
+			<form method="post">{% csrf_token %}
+				<input type="hidden" name="birth_date_form" value="True" />
+				<input type="hidden" name="patient" value="{{ patient.id }}" />
+				<input type="text" name="birth_date" value="{{ patient.birth_date|date:"m/d/Y" }}"/>
+				<a class="submit">Update</a>
+			</form>
 		</dd>
-		</form>
 	<dt>Age</dt>
 		<dd>{{ patient.birth_date|timesince }}</dd>
+	<dt>Location</dt> 
+		<dd>{{ patient.location }}</dd>
+		<dd class="hide">
+			<form method="post">{% csrf_token %}
+				<input type="hidden" name="location_form" value="True" />
+				<input type="hidden" name="patient" value="{{ patient.id }}" />
+				<input type="text" name="birth_date" value="{{ patient.location }}"/>
+				<a class="submit">Update</a>
+			</form>
+		</dd>
 </dl>
 </ul>

@@ -3,7 +3,7 @@
 	<div class="unit">
 	<dl class="details">
 	{% for user in team.users.all %}
-		<dt>{{ user.first_name }} {{ user.last_name }}<span class="right quiet">{{ user.get_profile.pager_phone_number }}</span></dt>
+		<dt>{{ user.first_name|slice:":10" }} {{ user.last_name|slice:":1" }}<span class="right quiet">{{ user.get_profile.pager_phone_number }}</span></dt>
 	{% endfor %}
 	</dl>
 	<ul class="patient-list">
