@@ -1,6 +1,17 @@
 {% load extras %}
 
 <ul id="todo-list">
+	<form id="todo-add-form" method="post" >{% csrf_token %}
+		<li>
+			<input type="hidden" name="todo_form" value="True" />
+			<input type="hidden" name="patient" value="{{ patient.id }}" />
+			<input type="hidden" name="active" value="True" />
+			<table>
+				<tr><th>New todo{{ todo_form.name.errors }}</th></tr>
+				<tr><td><input type="text" name="name" /></td></tr>
+			</table>
+		</li>
+	</form>
 	{% for todo in patient.todo_set.all %}
 		{% if not todo.done %}
 			<li {% if todo.created_date|timeuntil < todo.created_date|timesince %} class="alert" {% endif %}>		
@@ -25,15 +36,4 @@
 			</div>
 		{% endif %}
 	{% endfor %}
-	<form id="todo-add-form" method="post" >{% csrf_token %}
-		<li>
-			<input type="hidden" name="todo_form" value="True" />
-			<input type="hidden" name="patient" value="{{ patient.id }}" />
-			<input type="hidden" name="active" value="True" />
-			<table>
-				<tr><th>New todo{{ todo_form.name.errors }}</th></tr>
-				<tr><td><input type="text" name="name" /></td></tr>
-			</table>
-		</li>
-	</form>
 </ul>
